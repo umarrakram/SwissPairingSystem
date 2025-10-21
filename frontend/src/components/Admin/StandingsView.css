@@ -1,0 +1,77 @@
+.standings-view {
+  padding: 20px 0;
+}
+
+.standings-table {
+  width: 100%;
+}
+
+.standings-table thead {
+  background-color: #007bff;
+  color: white;
+}
+
+.standings-table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.standings-table td {
+  vertical-align: middle;
+}
+
+.rank-number {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.rank-1 {
+  background-color: #fff9e6;
+}
+
+.rank-2 {
+  background-color: #f5f5f5;
+}
+
+.rank-3 {
+  background-color: #fff4e6;
+}
+
+.points {
+  font-weight: 700;
+  color: #007bff;
+  font-size: 16px;
+}
+
+.standings-info {
+  background-color: #f8f9fa;
+  border-left: 4px solid #007bff;
+}
+
+.standings-info h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.standings-info p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .standings-table {
+    font-size: 12px;
+  }
+
+  .standings-table th,
+  .standings-table td {
+    padding: 8px 4px;
+  }
+
+  .rank-number {
+    font-size: 16px;
+  }
+}

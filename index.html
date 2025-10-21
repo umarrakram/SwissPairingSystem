@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Pairing System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .instructions {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 10px 0;
+        }
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♟️ Swiss Pairing System</h1>
+        <p>A complete tournament management system for chess competitions using the Swiss pairing algorithm.</p>
+        
+        <div class="instructions">
+            <h2>🚀 Quick Start</h2>
+            <ol>
+                <li><strong>Install MongoDB</strong> (if not already installed)</li>
+                <li><strong>Run setup:</strong> <code>./setup.sh</code></li>
+                <li><strong>Start Backend:</strong> <code>cd backend && npm run dev</code></li>
+                <li><strong>Start Frontend:</strong> <code>cd frontend && npm start</code></li>
+                <li><strong>Open:</strong> <a href="http://localhost:3000">http://localhost:3000</a></li>
+            </ol>
+        </div>
+
+        <p>📚 See <strong>QUICKSTART.md</strong> for detailed setup instructions</p>
+        <p>📖 See <strong>README.md</strong> for complete documentation</p>
+    </div>
+</body>
+</html>
