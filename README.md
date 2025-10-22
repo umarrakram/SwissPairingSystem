@@ -296,13 +296,55 @@ npm test
 **Frontend:**
 ```bash
 cd frontend
-npm run build
+npm run build:prod
 ```
 
 The build folder will contain optimized production files.
 
 **Backend:**
+```bash
+cd backend
+npm run prod
+```
+
 Configure production environment variables and deploy to your hosting service.
+
+## Deployment
+
+### Quick Deployment with Script
+
+Use the included deployment script for easy setup:
+
+```bash
+./deploy.sh
+```
+
+Select from the menu:
+1. **Development (Local)** - Start both frontend and backend locally
+2. **Production (Vercel - Backend)** - Deploy backend to Vercel
+3. **Production (Vercel - Frontend)** - Deploy frontend to Vercel
+4. **Production (Vercel - Both)** - Deploy both services
+5. **Test Build (Local)** - Build production version locally
+
+### Deployment Guides
+
+- **[VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)** - Complete guide for deploying to Vercel
+- **[DEV_VS_PROD.md](./DEV_VS_PROD.md)** - Understanding development vs production configurations
+- **[ENV_QUICK_REFERENCE.md](./ENV_QUICK_REFERENCE.md)** - Quick reference for environment variables
+
+### Environment Variables
+
+**Development:**
+- Backend uses `.env.development`
+- Frontend uses `.env.development`
+- Local MongoDB and proxy configuration
+
+**Production:**
+- Backend uses Vercel environment variables
+- Frontend uses Vercel environment variables
+- MongoDB Atlas and direct API URLs
+
+See [DEV_VS_PROD.md](./DEV_VS_PROD.md) for detailed configuration.
 
 ## Database Schema
 

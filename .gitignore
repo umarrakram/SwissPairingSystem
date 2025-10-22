@@ -43,3 +43,7 @@ temp/
 # Database
 data/
 *.db
+
+# Vercel
+.vercel
+.vercel.json
