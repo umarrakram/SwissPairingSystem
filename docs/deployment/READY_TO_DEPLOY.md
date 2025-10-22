@@ -3,8 +3,8 @@
 ## 🎉 Your MongoDB Atlas is Connected!
 
 **Database**: MongoDB Atlas  
-**Cluster**: cluster0.qugtqq6.mongodb.net  
-**Credentials**: EJUST / EJUST@2025  
+**Cluster**: [YOUR_CLUSTER_URL]  
+**Credentials**: [USERNAME] / [PASSWORD]  
 **Status**: ✅ Connection string configured in production files
 
 ---
@@ -22,9 +22,11 @@ FRONTEND_URL=http://localhost:3000
 
 ### Production (.env.production)
 ```env
+```bash
+# backend/.env.production (DO NOT COMMIT THIS FILE!)
 NODE_ENV=production
-MONGODB_URI=mongodb+srv://EJUST:EJUST@2025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
-FRONTEND_URL=https://your-frontend-domain.vercel.app
+MONGODB_URI=mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+FRONTEND_URL=https://your-frontend.vercel.app
 ```
 **Status**: ✅ Ready for Vercel deployment
 
@@ -77,7 +79,7 @@ This will:
 ### Backend Environment Variables (Vercel Dashboard)
 ```
 ✅ NODE_ENV = production
-✅ MONGODB_URI = mongodb+srv://EJUST:EJUST@2025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+✅ MONGODB_URI = mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
 ⏳ FRONTEND_URL = (update after frontend deployment)
 ```
 

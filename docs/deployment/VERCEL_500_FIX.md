@@ -8,17 +8,19 @@ This means your backend is deployed but can't connect to MongoDB Atlas or has a 
 
 ### Fix 1: URL Encode MongoDB Password ⭐ MOST LIKELY ISSUE
 
-Your password `EJUST@2025` contains `@` which breaks the connection string!
+### 🔍 Root Cause
+
+Your password contains `@` which breaks the connection string!
 
 **Current (BROKEN):**
 ```
-mongodb+srv://EJUST:EJUST@2025@cluster0.qugtqq6.mongodb.net/...
+mongodb+srv://USERNAME:PASS@WORD@cluster0.xxxxx.mongodb.net/...
                           ↑ This @ breaks the URL!
 ```
 
 **Fixed (URL Encoded):**
 ```
-mongodb+srv://EJUST:EJUST%402025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://USERNAME:PASS%40WORD@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
                           ↑ @ becomes %40
 ```
 
@@ -28,7 +30,7 @@ mongodb+srv://EJUST:EJUST%402025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retr
 3. Find `MONGODB_URI`
 4. Replace with:
 ```
-mongodb+srv://EJUST:EJUST%402025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://USERNAME:PASSWORD%40ENCODED@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
 ```
 5. Redeploy: Deployments → Click "..." → Redeploy
 
@@ -53,7 +55,7 @@ Go to Vercel Dashboard → Backend Project → Settings → Environment Variable
 **Required variables:**
 ```
 NODE_ENV = production
-MONGODB_URI = mongodb+srv://EJUST:EJUST%402025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI = mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
 FRONTEND_URL = https://your-frontend.vercel.app
 ```
 
@@ -117,24 +119,24 @@ https://your-backend.vercel.app/api/tournaments
 
 Your connection string should look EXACTLY like this:
 ```
-mongodb+srv://USERNAME:PASSWORD@cluster0.qugtqq6.mongodb.net/DATABASE?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/DATABASE?retryWrites=true&w=majority&appName=Cluster0
 ```
 
 **Parts breakdown:**
-- `USERNAME`: EJUST
-- `PASSWORD`: EJUST%402025 (note %40 for @)
-- `CLUSTER`: cluster0.qugtqq6.mongodb.net
+- `USERNAME`: Your MongoDB username
+- `PASSWORD`: Your password URL encoded (@ becomes %40)
+- `CLUSTER`: Your cluster address
 - `DATABASE`: swiss-pairing
 
 **Full working string:**
 ```
-mongodb+srv://EJUST:EJUST%402025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
 ```
 
 ### Step 2: Verify MongoDB Atlas User
 
 1. Go to MongoDB Atlas → Database Access
-2. Find user: `EJUST`
+2. Find your database user
 3. Check:
    - ✅ Password is correct
    - ✅ User has "Read and write to any database" role
@@ -146,14 +148,14 @@ If issues persist, create a new user with a simple password:
 
 1. MongoDB Atlas → Database Access
 2. Click "Add New Database User"
-3. Username: `ejustadmin`
+3. Username: `yourusername`
 4. Password: `SimplePass123` (no special characters!)
 5. Role: "Atlas Admin" or "Read and write to any database"
 6. Add User
 
 Then update Vercel environment variable:
 ```
-MONGODB_URI=mongodb+srv://ejustadmin:SimplePass123@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=mongodb+srv://yourusername:SimplePass123@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
 ```
 
 ---
@@ -163,8 +165,8 @@ MONGODB_URI=mongodb+srv://ejustadmin:SimplePass123@cluster0.qugtqq6.mongodb.net/
 **Do this NOW:**
 
 1. **URL Encode Password**
-   - Change: `EJUST@2025`
-   - To: `EJUST%402025`
+   - Change: `PASS@WORD`
+   - To: `PASS%40WORD`
 
 2. **Update Vercel**
    - Go to backend project settings
@@ -188,7 +190,7 @@ Update your local `.env.production` for reference:
 
 ```bash
 NODE_ENV=production
-MONGODB_URI=mongodb+srv://EJUST:EJUST%402025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
 FRONTEND_URL=https://your-frontend.vercel.app
 ```
 
@@ -269,8 +271,9 @@ REACT_APP_API_URL=https://your-backend.vercel.app/api
 
 **Your fixed connection string:**
 ```
-mongodb+srv://EJUST:EJUST%402025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
 ```
+Replace `username`, `password`, and `cluster0.xxxxx` with your actual MongoDB Atlas credentials.
 
 ---
 

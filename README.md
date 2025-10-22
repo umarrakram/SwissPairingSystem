@@ -1,122 +1,241 @@
-# Swiss Pairing System for Chess Tournaments
+# Swiss Pairing System# Swiss Pairing System for Chess Tournaments
 
-A full-stack web application for managing chess tournaments using the Swiss pairing system. Built with React (frontend) and Node.js/Express (backend).
 
-## Features
 
-### Admin Features
-- **Tournament Management**
-  - Create new tournaments with name and date
+A full-stack web application for managing chess tournaments using the Swiss pairing system.A full-stack web application for managing chess tournaments using the Swiss pairing system. Built with React (frontend) and Node.js/Express (backend).
+
+
+
+## 🎯 Quick Links## Features
+
+
+
+- **🚀 [Get Started](docs/getting-started/QUICKSTART.md)** - Set up and run locally in 5 minutes### Admin Features
+
+- **📦 [Deploy to Vercel](docs/deployment/QUICK_DEPLOY.md)** - Production deployment guide- **Tournament Management**
+
+- **🔐 [Security Notice](docs/security/SECURITY_FIX_REQUIRED.md)** - Important security information  - Create new tournaments with name and date
+
   - Access existing tournaments from database
-  - Track tournament status (upcoming, ongoing, completed)
+
+## 📚 Documentation  - Track tournament status (upcoming, ongoing, completed)
+
   - Generate shareable public viewing links
 
-- **Player Management**
-  - Add players individually with name, rating, and university
-  - Bulk upload players via Excel file
-  - View and manage all registered players
-  - Track player points after each round
+### Getting Started
 
-- **Swiss Pairing System**
-  - Automatic pairing generation based on Swiss system algorithm
-  - Considerations: point scores, previous opponents, color balance
-  - Support for bye rounds
-  - Update match results (win/loss/draw/forfeit)
+- [Quickstart Guide](docs/getting-started/QUICKSTART.md) - Complete setup instructions- **Player Management**
+
+- [Quick Reference](docs/getting-started/QUICK_REFERENCE.md) - Command cheat sheet  - Add players individually with name, rating, and university
+
+  - Bulk upload players via Excel file
+
+### Deployment  - View and manage all registered players
+
+- [Quick Deploy](docs/deployment/QUICK_DEPLOY.md) - Fast Vercel deployment  - Track player points after each round
+
+- [Deployment Guide](docs/deployment/DEPLOYMENT_GUIDE.md) - Comprehensive deployment instructions
+
+- [Deployment Checklist](docs/deployment/DEPLOYMENT_CHECKLIST.md) - Pre-deployment verification- **Swiss Pairing System**
+
+- [Dev vs Prod](docs/deployment/DEV_VS_PROD.md) - Environment differences  - Automatic pairing generation based on Swiss system algorithm
+
+- [Environment Variables](docs/deployment/ENV_QUICK_REFERENCE.md) - Environment configuration  - Considerations: point scores, previous opponents, color balance
+
+- [Vercel 500 Fix](docs/deployment/VERCEL_500_FIX.md) - Troubleshooting server errors  - Support for bye rounds
+
+- [Vercel Deployment](docs/deployment/VERCEL_DEPLOYMENT.md) - Detailed Vercel guide  - Update match results (win/loss/draw/forfeit)
+
+- [Visual Deployment Guide](docs/deployment/VISUAL_DEPLOYMENT_GUIDE.md) - Step-by-step with screenshots
 
 - **Standings & Rankings**
-  - Real-time tournament standings
-  - Tiebreak calculations (Buchholz system)
-  - Sortable by points, tiebreaks, and rating
 
-### User/Public Features
-- **Public Viewing Link**
-  - Share tournament link with participants
+### Security  - Real-time tournament standings
+
+- [Security Fix Required](docs/security/SECURITY_FIX_REQUIRED.md) - Critical security information  - Tiebreak calculations (Buchholz system)
+
+- **⚠️ Important**: Review this document if you're deploying to production  - Sortable by points, tiebreaks, and rating
+
+
+
+### Architecture### User/Public Features
+
+- [Architecture Overview](docs/architecture/ARCHITECTURE.md) - System design and structure- **Public Viewing Link**
+
+- [Project Summary](docs/architecture/PROJECT_SUMMARY.md) - Technical overview  - Share tournament link with participants
+
   - View current standings
-  - View pairings for all rounds
-  - See match results and scores
 
-## Tech Stack
+### Guides  - View pairings for all rounds
 
-### Backend
+- [Testing Guide](docs/guides/TESTING_GUIDE.md) - How to test the application  - See match results and scores
+
+- [Excel Template Guide](docs/guides/EXCEL_TEMPLATE_GUIDE.md) - Bulk player import instructions
+
+- [Authentication & Schema Updates](docs/guides/AUTH_AND_SCHEMA_UPDATES.md) - Recent changes## Tech Stack
+
+
+
+## 🏗️ Tech Stack### Backend
+
 - **Node.js** with Express.js
-- **MongoDB** with Mongoose ODM
-- **Additional Libraries:**
-  - `multer` - File upload handling
+
+- **Frontend**: React 18, React Router 6, Axios- **MongoDB** with Mongoose ODM
+
+- **Backend**: Node.js, Express, MongoDB Atlas- **Additional Libraries:**
+
+- **Deployment**: Vercel (Frontend + Serverless Backend)  - `multer` - File upload handling
+
   - `xlsx` - Excel file parsing
-  - `cors` - Cross-origin resource sharing
+
+## ✨ Features  - `cors` - Cross-origin resource sharing
+
   - `dotenv` - Environment configuration
 
-### Frontend
-- **React** 18
-- **React Router** - Client-side routing
-- **Axios** - HTTP client
-- **CSS3** - Responsive styling
+- ✅ Swiss pairing algorithm implementation
 
-## Project Structure
+- ✅ Player management (add, edit, delete)### Frontend
+
+- ✅ Bulk player import via Excel- **React** 18
+
+- ✅ Tournament round management- **React Router** - Client-side routing
+
+- ✅ Match result recording- **Axios** - HTTP client
+
+- ✅ Real-time standings calculation- **CSS3** - Responsive styling
+
+- ✅ Tiebreaker support
+
+- ✅ Admin authentication## Project Structure
+
+- ✅ Public viewing mode
 
 ```
-SwissPairingSystem/
+
+## 🚀 Quick StartSwissPairingSystem/
+
 ├── backend/
-│   ├── models/
-│   │   ├── Tournament.js
-│   │   ├── Player.js
-│   │   └── Pairing.js
+
+### Prerequisites│   ├── models/
+
+- Node.js (v24.10.0 or higher)│   │   ├── Tournament.js
+
+- MongoDB Atlas account│   │   ├── Player.js
+
+- Git│   │   └── Pairing.js
+
 │   ├── routes/
-│   │   ├── tournaments.js
+
+### Local Development│   │   ├── tournaments.js
+
 │   │   ├── players.js
-│   │   ├── pairings.js
-│   │   └── rounds.js
-│   ├── utils/
-│   │   └── swissPairing.js
+
+```bash│   │   ├── pairings.js
+
+# Clone the repository│   │   └── rounds.js
+
+git clone https://github.com/yourusername/SwissPairingSystem.git│   ├── utils/
+
+cd SwissPairingSystem│   │   └── swissPairing.js
+
 │   ├── server.js
-│   ├── package.json
-│   └── .env
-├── frontend/
+
+# Install dependencies│   ├── package.json
+
+cd backend && npm install│   └── .env
+
+cd ../frontend && npm install├── frontend/
+
 │   ├── public/
-│   ├── src/
-│   │   ├── components/
+
+# Configure environment variables│   ├── src/
+
+# Create backend/.env with your MongoDB URI│   │   ├── components/
+
 │   │   │   ├── Admin/
-│   │   │   │   ├── AdminDashboard.js
-│   │   │   │   ├── TournamentView.js
+
+# Start backend (port 5001)│   │   │   │   ├── AdminDashboard.js
+
+cd backend && npm start│   │   │   │   ├── TournamentView.js
+
 │   │   │   │   ├── PlayerManagement.js
-│   │   │   │   ├── PairingsView.js
-│   │   │   │   └── StandingsView.js
-│   │   │   └── User/
+
+# Start frontend (port 3000) in new terminal│   │   │   │   ├── PairingsView.js
+
+cd frontend && npm start│   │   │   │   └── StandingsView.js
+
+```│   │   │   └── User/
+
 │   │   │       └── UserView.js
-│   │   ├── services/
+
+Visit `http://localhost:3000` to access the application.│   │   ├── services/
+
 │   │   │   └── api.js
-│   │   ├── App.js
+
+For detailed instructions, see the [Quickstart Guide](docs/getting-started/QUICKSTART.md).│   │   ├── App.js
+
 │   │   ├── index.js
-│   │   └── index.css
+
+## 📖 Full Documentation Index│   │   └── index.css
+
 │   └── package.json
-└── README.md
+
+For a complete list of all documentation, see [Documentation Index](docs/DOCUMENTATION_INDEX.md).└── README.md
+
 ```
+
+## 🔑 Admin Access
 
 ## Installation & Setup
 
-### Prerequisites
+- **Username**: `AdminEjust`
+
+- **Password**: `EJUSTChess2025`### Prerequisites
+
 - Node.js (v14 or higher)
-- MongoDB (local or Atlas)
+
+*Note: These credentials are hardcoded in the frontend for demonstration purposes.*- MongoDB (local or Atlas)
+
 - npm or yarn
+
+## 🤝 Contributing
 
 ### Backend Setup
 
+This project is currently in active development. For major changes, please open an issue first.
+
 1. Navigate to the backend directory:
-```bash
+
+## 📝 License```bash
+
 cd backend
-```
 
-2. Install dependencies:
+[MIT License](LICENSE)```
+
+
+
+## 🆘 Support2. Install dependencies:
+
 ```bash
-npm install
-```
 
-3. Configure environment variables:
+If you encounter issues:npm install
+
+1. Check the [Deployment Troubleshooting](docs/deployment/VERCEL_500_FIX.md)```
+
+2. Review the [Security Fix](docs/security/SECURITY_FIX_REQUIRED.md)
+
+3. Consult the [Quickstart Guide](docs/getting-started/QUICKSTART.md)3. Configure environment variables:
+
 Create a `.env` file with the following:
-```
+
+---```
+
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/swiss-pairing
-NODE_ENV=development
+
+**Last Updated**: 2025MONGODB_URI=mongodb://localhost:27017/swiss-pairing
+
+**Version**: 1.0.0NODE_ENV=development
+
 ```
 
 4. Start MongoDB (if using local installation):

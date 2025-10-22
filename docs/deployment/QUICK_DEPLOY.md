@@ -2,12 +2,12 @@
 
 Your MongoDB Atlas is already configured! Here's your fast-track deployment guide.
 
-## ✅ Prerequisites Complete
+### ✅ Pre-Configuration Status
 
-- ✅ **MongoDB Atlas**: Connection string configured
-- ✅ **Database Credentials**: EJUST / EJUST@2025
-- ✅ **Cluster**: cluster0.qugtqq6.mongodb.net
-- ✅ **Codebase**: Fully prepared for deployment
+- ✅ **MongoDB Atlas** configured and ready
+- ✅ **Database Credentials**: [YOUR_USERNAME] / [YOUR_PASSWORD]
+- ✅ **Cluster**: [YOUR_CLUSTER_URL]
+- ✅ **IP Whitelist**: 0.0.0.0/0 (allows all connections)
 
 ## 🎯 Quick Deployment Steps
 
@@ -26,7 +26,8 @@ Your MongoDB Atlas is already configured! Here's your fast-track deployment guid
    production
    
    MONGODB_URI
-   mongodb+srv://EJUST:EJUST@2025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+   mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+   (Replace with your actual MongoDB Atlas connection string)
    
    FRONTEND_URL
    (leave blank for now)
@@ -98,7 +99,7 @@ Your MongoDB Atlas is already configured! Here's your fast-track deployment guid
 | Variable | Value |
 |----------|-------|
 | `NODE_ENV` | `production` |
-| `MONGODB_URI` | `mongodb+srv://EJUST:EJUST@2025@cluster0.qugtqq6.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0` |
+| `MONGODB_URI` | `mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0` |
 | `FRONTEND_URL` | Your frontend Vercel URL (update after Step 2) |
 
 ### Frontend (Vercel Dashboard)
@@ -149,9 +150,9 @@ This will:
 ## 📊 Your Configuration
 
 ```
-MongoDB Atlas Cluster: cluster0.qugtqq6.mongodb.net
+MongoDB Atlas Cluster: [YOUR_CLUSTER_URL]
 Database Name: swiss-pairing
-Database User: EJUST
+Database User: [YOUR_USERNAME]
 Connection: mongodb+srv:// protocol
 
 Vercel Projects:

@@ -9,10 +9,17 @@ yarn.lock
 .env.development.local
 .env.test.local
 .env.production.local
+.env.production
+backend/.env
+backend/.env.production
+frontend/.env.production
 
 # Build files
 /frontend/build
 /backend/dist
+
+# Backups
+.backup/
 
 # Logs
 logs
