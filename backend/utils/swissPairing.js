@@ -30,6 +30,60 @@ class SwissPairing {
     const paired = new Set();
     let boardNumber = 1;
 
+    // **ROUND 1 SPECIAL LOGIC**: Divide players into two halves by rating
+    if (roundNumber === 1) {
+      // Sort players by rating (descending)
+      const sortedByRating = [...players].sort((a, b) => b.rating - a.rating);
+      
+      // Calculate midpoint
+      const midpoint = Math.floor(sortedByRating.length / 2);
+      
+      // Split into top half and bottom half
+      const topHalf = sortedByRating.slice(0, midpoint);
+      const bottomHalf = sortedByRating.slice(midpoint);
+      
+      // Pair first with first, second with second, etc.
+      for (let i = 0; i < topHalf.length; i++) {
+        if (i < bottomHalf.length) {
+          const player1 = topHalf[i];
+          const player2 = bottomHalf[i];
+          
+          // Higher rated player gets white
+          const { whitePlayer, blackPlayer } = player1.rating >= player2.rating
+            ? { whitePlayer: player1, blackPlayer: player2 }
+            : { whitePlayer: player2, blackPlayer: player1 };
+
+          pairings.push({
+            tournament: tournamentId,
+            round: roundNumber,
+            whitePlayer: whitePlayer._id,
+            blackPlayer: blackPlayer._id,
+            board: boardNumber++,
+            result: 'pending'
+          });
+
+          paired.add(player1._id.toString());
+          paired.add(player2._id.toString());
+        }
+      }
+      
+      // Handle bye if odd number of players
+      if (sortedByRating.length % 2 === 1) {
+        const byePlayer = sortedByRating[sortedByRating.length - 1];
+        pairings.push({
+          tournament: tournamentId,
+          round: roundNumber,
+          whitePlayer: byePlayer._id,
+          blackPlayer: null,
+          board: boardNumber++,
+          result: '1-0' // Bye gets full point
+        });
+      }
+      
+      return pairings;
+    }
+
+    // **ROUND 2+ LOGIC**: Standard Swiss pairing by points
     // Group players by points
     const pointGroups = this.groupByPoints(players);
 
