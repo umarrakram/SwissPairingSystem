@@ -13,13 +13,9 @@ const playerSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    required: true,
-    min: 0
-  },
-  university: {
-    type: String,
-    required: true,
-    trim: true
+    required: false,
+    min: 0,
+    default: 1200
   },
   points: {
     type: Number,

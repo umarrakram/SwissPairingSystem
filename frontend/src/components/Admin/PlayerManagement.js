@@ -9,8 +9,7 @@ function PlayerManagement({ tournamentId }) {
   const [showBulkModal, setShowBulkModal] = useState(false);
   const [newPlayer, setNewPlayer] = useState({
     name: '',
-    rating: '',
-    university: ''
+    rating: ''
   });
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState('');
@@ -41,11 +40,11 @@ function PlayerManagement({ tournamentId }) {
       await playerAPI.create({
         ...newPlayer,
         tournament: tournamentId,
-        rating: parseInt(newPlayer.rating)
+        rating: newPlayer.rating ? parseInt(newPlayer.rating) : 1200
       });
       setSuccess('Player added successfully!');
       setShowAddModal(false);
-      setNewPlayer({ name: '', rating: '', university: '' });
+      setNewPlayer({ name: '', rating: '' });
       fetchPlayers();
     } catch (err) {
       setError('Failed to add player');
@@ -135,7 +134,6 @@ function PlayerManagement({ tournamentId }) {
                 <th>#</th>
                 <th>Name</th>
                 <th>Rating</th>
-                <th>University</th>
                 <th>Points</th>
                 <th>Actions</th>
               </tr>
@@ -145,8 +143,7 @@ function PlayerManagement({ tournamentId }) {
                 <tr key={player._id}>
                   <td>{index + 1}</td>
                   <td>{player.name}</td>
-                  <td>{player.rating}</td>
-                  <td>{player.university}</td>
+                  <td>{player.rating || 1200}</td>
                   <td>{player.points}</td>
                   <td>
                     <button 
@@ -179,22 +176,13 @@ function PlayerManagement({ tournamentId }) {
                 />
               </div>
               <div className="form-group">
-                <label>Rating *</label>
+                <label>Rating (optional, default: 1200)</label>
                 <input
                   type="number"
                   min="0"
                   value={newPlayer.rating}
                   onChange={(e) => setNewPlayer({ ...newPlayer, rating: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>University *</label>
-                <input
-                  type="text"
-                  value={newPlayer.university}
-                  onChange={(e) => setNewPlayer({ ...newPlayer, university: e.target.value })}
-                  required
+                  placeholder="1200"
                 />
               </div>
               <div className="modal-actions">
@@ -219,11 +207,10 @@ function PlayerManagement({ tournamentId }) {
               <p><strong>Excel File Format:</strong></p>
               <p>Your Excel file should have the following columns:</p>
               <ul>
-                <li><strong>Name</strong> - Player's full name</li>
-                <li><strong>Rating</strong> - Player's rating (number)</li>
-                <li><strong>University</strong> - University name</li>
+                <li><strong>Name</strong> - Player's full name (required)</li>
+                <li><strong>Rating</strong> - Player's rating (optional, defaults to 1200)</li>
               </ul>
-              <p className="note">Note: Column names are case-insensitive</p>
+              <p className="note">Note: Column names are case-insensitive. Rating is optional.</p>
             </div>
             <form onSubmit={handleBulkUpload}>
               <div className="form-group">

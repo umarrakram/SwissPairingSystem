@@ -38,8 +38,7 @@ router.post('/', async (req, res) => {
     const player = new Player({
       tournament: req.body.tournament,
       name: req.body.name,
-      rating: req.body.rating,
-      university: req.body.university
+      rating: req.body.rating || 1200
     });
 
     const newPlayer = await player.save();
@@ -74,27 +73,30 @@ router.post('/bulk-upload', upload.single('file'), async (req, res) => {
     for (let i = 0; i < data.length; i++) {
       const row = data[i];
       
-      // Expected columns: Name, Rating, University (case-insensitive)
+      // Expected columns: Name, Rating (optional)
       const name = row.Name || row.name || row.NAME;
       const rating = row.Rating || row.rating || row.RATING;
-      const university = row.University || row.university || row.UNIVERSITY;
 
-      if (!name || !rating || !university) {
-        errors.push(`Row ${i + 2}: Missing required fields (Name, Rating, University)`);
+      if (!name) {
+        errors.push(`Row ${i + 2}: Missing required field (Name)`);
         continue;
       }
 
-      if (isNaN(rating) || rating < 0) {
-        errors.push(`Row ${i + 2}: Invalid rating value`);
-        continue;
+      // Rating is optional, default to 1200
+      let playerRating = 1200;
+      if (rating) {
+        if (isNaN(rating) || rating < 0) {
+          errors.push(`Row ${i + 2}: Invalid rating value, using default 1200`);
+        } else {
+          playerRating = parseInt(rating);
+        }
       }
 
       try {
         const player = new Player({
           tournament: tournamentId,
           name: name.toString().trim(),
-          rating: parseInt(rating),
-          university: university.toString().trim()
+          rating: playerRating
         });
 
         const savedPlayer = await player.save();
@@ -124,7 +126,6 @@ router.put('/:id', async (req, res) => {
 
     if (req.body.name) player.name = req.body.name;
     if (req.body.rating !== undefined) player.rating = req.body.rating;
-    if (req.body.university) player.university = req.body.university;
     if (req.body.points !== undefined) player.points = req.body.points;
 
     const updatedPlayer = await player.save();

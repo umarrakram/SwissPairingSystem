@@ -119,7 +119,6 @@ function UserView() {
                     <tr>
                       <th>Rank</th>
                       <th>Player</th>
-                      <th>University</th>
                       <th>Rating</th>
                       <th>Points</th>
                     </tr>
@@ -136,8 +135,7 @@ function UserView() {
                           </span>
                         </td>
                         <td><strong>{player.name}</strong></td>
-                        <td>{player.university}</td>
-                        <td>{player.rating}</td>
+                        <td>{player.rating || 1200}</td>
                         <td className="points">{player.points}</td>
                       </tr>
                     ))}
@@ -189,7 +187,7 @@ function UserView() {
                       <div className="player-details">
                         <strong>{pairing.whitePlayer?.name || 'Unknown'}</strong>
                         <span className="meta">
-                          {pairing.whitePlayer?.rating} | {pairing.whitePlayer?.university}
+                          Rating: {pairing.whitePlayer?.rating || 1200}
                         </span>
                         <span className="score">Points: {pairing.whitePlayer?.points}</span>
                       </div>
@@ -204,7 +202,7 @@ function UserView() {
                           <>
                             <strong>{pairing.blackPlayer.name}</strong>
                             <span className="meta">
-                              {pairing.blackPlayer.rating} | {pairing.blackPlayer.university}
+                              Rating: {pairing.blackPlayer.rating || 1200}
                             </span>
                             <span className="score">Points: {pairing.blackPlayer.points}</span>
                           </>
