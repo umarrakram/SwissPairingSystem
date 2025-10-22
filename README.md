@@ -1,4 +1,4 @@
-# Swiss Pairing System# Swiss Pairing System for Chess Tournaments
+#  Swiss Pairing System for Chess Tournaments
 
 
 
