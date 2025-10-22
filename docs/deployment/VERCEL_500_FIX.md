@@ -20,18 +20,18 @@ mongodb+srv://USERNAME:PASS@WORD@cluster0.xxxxx.mongodb.net/...
 
 **Fixed (URL Encoded):**
 ```
-mongodb+srv://USERNAME:PASS%40WORD@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://<USERNAME>:<URL_ENCODED_PASSWORD>@<your-cluster>.mongodb.net/swiss-pairing?retryWrites=true&w=majority
                           ↑ @ becomes %40
 ```
+*(Replace `<USERNAME>`, `<URL_ENCODED_PASSWORD>`, and `<your-cluster>` with your actual values)*
 
 **How to Fix:**
 1. Go to Vercel Dashboard → Your Backend Project
 2. Settings → Environment Variables
 3. Find `MONGODB_URI`
-4. Replace with:
-```
-mongodb+srv://USERNAME:PASSWORD%40ENCODED@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
-```
+4. Replace with your connection string (URL encode special characters in password)
+   - Format: `mongodb+srv://<username>:<encoded-password>@<cluster>/swiss-pairing?retryWrites=true&w=majority`
+   - Example: If password is `Pass@123`, use `Pass%40123`
 5. Redeploy: Deployments → Click "..." → Redeploy
 
 ---
@@ -117,9 +117,9 @@ https://your-backend.vercel.app/api/tournaments
 
 ### Step 1: Verify Connection String Format
 
-Your connection string should look EXACTLY like this:
+Your connection string format:
 ```
-mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/DATABASE?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://<username>:<password>@<cluster-address>/swiss-pairing?retryWrites=true&w=majority
 ```
 
 **Parts breakdown:**
@@ -153,10 +153,11 @@ If issues persist, create a new user with a simple password:
 5. Role: "Atlas Admin" or "Read and write to any database"
 6. Add User
 
-Then update Vercel environment variable:
+Then update Vercel environment variable with your actual credentials:
 ```
-MONGODB_URI=mongodb+srv://yourusername:SimplePass123@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=mongodb+srv://<your-new-username>:<your-new-password>@<cluster>/swiss-pairing?retryWrites=true&w=majority
 ```
+*(Use angle brackets to indicate placeholder values - replace with your actual credentials)*
 
 ---
 

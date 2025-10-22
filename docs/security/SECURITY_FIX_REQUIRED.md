@@ -92,8 +92,9 @@ After changing MongoDB password:
 2. **Backend Project** → Settings → Environment Variables
 3. **Update `MONGODB_URI`** with new password:
    ```
-   mongodb+srv://USERNAME:YOUR_NEW_PASSWORD@cluster0.xxxxx.mongodb.net/swiss-pairing?retryWrites=true&w=majority&appName=Cluster0
+   mongodb+srv://<username>:<NEW_PASSWORD>@<your-cluster>.mongodb.net/swiss-pairing?retryWrites=true&w=majority
    ```
+   *(Replace placeholders in angle brackets with your actual values)*
 4. **Redeploy** backend
 
 ### Step 4: Update Local Environment
