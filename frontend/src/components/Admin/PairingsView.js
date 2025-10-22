@@ -56,14 +56,12 @@ function PairingsView({ tournamentId, tournament }) {
     }
   };
 
-  const formatDateTime = (date) => {
-    if (!date) return 'Not set';
-    const d = new Date(date);
-    return d.toLocaleString('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
-      hour: '2-digit', 
-      minute: '2-digit' 
+  const formatDateTime = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit'
     });
   };
 
