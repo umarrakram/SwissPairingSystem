@@ -47,7 +47,12 @@ function PairingsView({ tournamentId, tournament }) {
     setSuccess('');
 
     try {
-      await pairingAPI.updateSchedule(pairingId, scheduledTime);
+      // Convert time (HH:MM) to full datetime for today
+      const [hours, minutes] = scheduledTime.split(':');
+      const date = new Date();
+      date.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+      
+      await pairingAPI.updateSchedule(pairingId, date.toISOString());
       setSuccess('Match time updated successfully');
       setEditingTime({});
       fetchPairings();
@@ -168,10 +173,10 @@ function PairingsView({ tournamentId, tournament }) {
                   {editingTime[pairing._id] ? (
                     <div className="schedule-input-group">
                       <input
-                        type="datetime-local"
+                        type="time"
                         defaultValue={
                           pairing.scheduledTime 
-                            ? new Date(pairing.scheduledTime).toISOString().slice(0, 16)
+                            ? new Date(pairing.scheduledTime).toISOString().slice(11, 16)
                             : ''
                         }
                         onChange={(e) => {
