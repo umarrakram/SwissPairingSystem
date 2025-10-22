@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { pairingAPI } from '../../services/api';
 import './PairingsView.css';
 
@@ -9,15 +9,7 @@ function PairingsView({ tournamentId, tournament }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    if (selectedRound > 0) {
-      fetchPairings();
-    } else {
-      setLoading(false);
-    }
-  }, [selectedRound, tournamentId]);
-
-  const fetchPairings = async () => {
+  const fetchPairings = useCallback(async () => {
     try {
       const response = await pairingAPI.getByTournamentAndRound(tournamentId, selectedRound);
       setPairings(response.data);
@@ -26,7 +18,15 @@ function PairingsView({ tournamentId, tournament }) {
       setError('Failed to load pairings');
       setLoading(false);
     }
-  };
+  }, [tournamentId, selectedRound]);
+
+  useEffect(() => {
+    if (selectedRound > 0) {
+      fetchPairings();
+    } else {
+      setLoading(false);
+    }
+  }, [selectedRound, fetchPairings]);
 
   const handleResultChange = async (pairingId, result) => {
     setError('');

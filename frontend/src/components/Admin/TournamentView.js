@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { tournamentAPI, playerAPI, pairingAPI, roundAPI } from '../../services/api';
+import { tournamentAPI, pairingAPI, roundAPI } from '../../services/api';
 import PlayerManagement from './PlayerManagement';
 import PairingsView from './PairingsView';
 import StandingsView from './StandingsView';
@@ -14,11 +14,7 @@ function TournamentView() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    fetchTournament();
-  }, [id]);
-
-  const fetchTournament = async () => {
+  const fetchTournament = useCallback(async () => {
     try {
       const response = await tournamentAPI.getById(id);
       setTournament(response.data);
@@ -27,7 +23,11 @@ function TournamentView() {
       setError('Failed to load tournament');
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchTournament();
+  }, [fetchTournament]);
 
   const handleGeneratePairings = async () => {
     setError('');

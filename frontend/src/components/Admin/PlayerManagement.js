@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { playerAPI } from '../../services/api';
 import './PlayerManagement.css';
 
@@ -17,11 +17,7 @@ function PlayerManagement({ tournamentId }) {
   const [success, setSuccess] = useState('');
   const [uploadErrors, setUploadErrors] = useState([]);
 
-  useEffect(() => {
-    fetchPlayers();
-  }, [tournamentId]);
-
-  const fetchPlayers = async () => {
+  const fetchPlayers = useCallback(async () => {
     try {
       const response = await playerAPI.getByTournament(tournamentId);
       setPlayers(response.data);
@@ -30,7 +26,11 @@ function PlayerManagement({ tournamentId }) {
       setError('Failed to load players');
       setLoading(false);
     }
-  };
+  }, [tournamentId]);
+
+  useEffect(() => {
+    fetchPlayers();
+  }, [fetchPlayers]);
 
   const handleAddPlayer = async (e) => {
     e.preventDefault();

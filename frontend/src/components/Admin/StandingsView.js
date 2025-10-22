@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { tournamentAPI } from '../../services/api';
 import './StandingsView.css';
 
@@ -7,11 +7,7 @@ function StandingsView({ tournamentId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchStandings();
-  }, [tournamentId]);
-
-  const fetchStandings = async () => {
+  const fetchStandings = useCallback(async () => {
     try {
       const response = await tournamentAPI.getStandings(tournamentId);
       setStandings(response.data);
@@ -20,7 +16,11 @@ function StandingsView({ tournamentId }) {
       setError('Failed to load standings');
       setLoading(false);
     }
-  };
+  }, [tournamentId]);
+
+  useEffect(() => {
+    fetchStandings();
+  }, [fetchStandings]);
 
   if (loading) {
     return <div className="loading">Loading standings...</div>;

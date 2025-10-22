@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { tournamentAPI, pairingAPI } from '../../services/api';
 import './UserView.css';
@@ -13,17 +13,7 @@ function UserView() {
   const [error, setError] = useState('');
   const [activeView, setActiveView] = useState('standings');
 
-  useEffect(() => {
-    fetchTournamentData();
-  }, [shareLink]);
-
-  useEffect(() => {
-    if (selectedRound && tournament) {
-      fetchPairings();
-    }
-  }, [selectedRound]);
-
-  const fetchTournamentData = async () => {
+  const fetchTournamentData = useCallback(async () => {
     try {
       const tournamentResponse = await tournamentAPI.getByShareLink(shareLink);
       const tournamentData = tournamentResponse.data;
@@ -41,16 +31,27 @@ function UserView() {
       setError('Tournament not found or link is invalid');
       setLoading(false);
     }
-  };
+  }, [shareLink]);
 
-  const fetchPairings = async () => {
+  const fetchPairings = useCallback(async () => {
+    if (!tournament) return;
     try {
       const response = await pairingAPI.getByTournamentAndRound(tournament._id, selectedRound);
       setPairings(response.data);
     } catch (err) {
       console.error('Failed to load pairings', err);
     }
-  };
+  }, [tournament, selectedRound]);
+
+  useEffect(() => {
+    fetchTournamentData();
+  }, [fetchTournamentData]);
+
+  useEffect(() => {
+    if (selectedRound && tournament) {
+      fetchPairings();
+    }
+  }, [selectedRound, tournament, fetchPairings]);
 
   const getResultClass = (result) => {
     if (result === '1-0' || result === '1-0F') return 'result-white';
