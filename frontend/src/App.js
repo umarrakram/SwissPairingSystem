@@ -42,7 +42,7 @@ function App() {
                 <Link to="/" style={{ textDecoration: 'none' }} className="logo-link">
                   <div className="logo-container">
                     <img 
-                      src="/ejust-logo.svg" 
+                      src="/ejust-logo.png" 
                       alt="E-JUST Logo" 
                       className="logo-image"
                       onError={(e) => {
