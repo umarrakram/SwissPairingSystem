@@ -8,6 +8,7 @@ function PairingsView({ tournamentId, tournament }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [editingTime, setEditingTime] = useState({});
 
   const fetchPairings = useCallback(async () => {
     try {
@@ -39,6 +40,31 @@ function PairingsView({ tournamentId, tournament }) {
     } catch (err) {
       setError('Failed to update result');
     }
+  };
+
+  const handleScheduleTime = async (pairingId, scheduledTime) => {
+    setError('');
+    setSuccess('');
+
+    try {
+      await pairingAPI.updateSchedule(pairingId, scheduledTime);
+      setSuccess('Match time updated successfully');
+      setEditingTime({});
+      fetchPairings();
+    } catch (err) {
+      setError('Failed to update match time');
+    }
+  };
+
+  const formatDateTime = (date) => {
+    if (!date) return 'Not set';
+    const d = new Date(date);
+    return d.toLocaleString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
   };
 
   const getResultClass = (result) => {
@@ -93,9 +119,14 @@ function PairingsView({ tournamentId, tournament }) {
             <div key={pairing._id} className="pairing-card card">
               <div className="pairing-header">
                 <span className="board-number">Board {pairing.board}</span>
-                <span className={`result-badge ${getResultClass(pairing.result)}`}>
-                  {pairing.result === 'pending' ? 'Pending' : pairing.result}
-                </span>
+                <div className="header-right">
+                  <span className="scheduled-time">
+                    🕐 {formatDateTime(pairing.scheduledTime)}
+                  </span>
+                  <span className={`result-badge ${getResultClass(pairing.result)}`}>
+                    {pairing.result === 'pending' ? 'Pending' : pairing.result}
+                  </span>
+                </div>
               </div>
               
               <div className="pairing-body">
@@ -132,31 +163,76 @@ function PairingsView({ tournamentId, tournament }) {
                 </div>
               </div>
 
-              {pairing.blackPlayer && (
-                <div className="pairing-actions">
-                  <label>Result:</label>
-                  <select 
-                    value={pairing.result}
-                    onChange={(e) => handleResultChange(pairing._id, e.target.value)}
-                    disabled={pairing.result !== 'pending'}
-                  >
-                    <option value="pending">Pending</option>
-                    <option value="1-0">1-0 (White Wins)</option>
-                    <option value="0.5-0.5">½-½ (Draw)</option>
-                    <option value="0-1">0-1 (Black Wins)</option>
-                    <option value="1-0F">1-0 (Black Forfeit)</option>
-                    <option value="0-1F">0-1 (White Forfeit)</option>
-                  </select>
-                  {pairing.result !== 'pending' && (
-                    <button 
-                      className="btn btn-secondary btn-sm"
-                      onClick={() => handleResultChange(pairing._id, 'pending')}
+              <div className="pairing-footer">
+                {/* Match Time Scheduling */}
+                <div className="schedule-section">
+                  <label>Match Time:</label>
+                  {editingTime[pairing._id] ? (
+                    <div className="schedule-input-group">
+                      <input
+                        type="datetime-local"
+                        defaultValue={
+                          pairing.scheduledTime 
+                            ? new Date(pairing.scheduledTime).toISOString().slice(0, 16)
+                            : ''
+                        }
+                        onChange={(e) => {
+                          setEditingTime({
+                            ...editingTime,
+                            [pairing._id]: e.target.value
+                          });
+                        }}
+                      />
+                      <button
+                        className="btn btn-success btn-sm"
+                        onClick={() => handleScheduleTime(pairing._id, editingTime[pairing._id])}
+                      >
+                        Save
+                      </button>
+                      <button
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => setEditingTime({})}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={() => setEditingTime({ [pairing._id]: true })}
                     >
-                      Reset
+                      {pairing.scheduledTime ? 'Edit Time' : 'Set Time'}
                     </button>
                   )}
                 </div>
-              )}
+
+                {/* Result Selection */}
+                {pairing.blackPlayer && (
+                  <div className="result-section">
+                    <label>Result:</label>
+                    <select 
+                      value={pairing.result}
+                      onChange={(e) => handleResultChange(pairing._id, e.target.value)}
+                      disabled={pairing.result !== 'pending'}
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="1-0">1-0 (White Wins)</option>
+                      <option value="0.5-0.5">½-½ (Draw)</option>
+                      <option value="0-1">0-1 (Black Wins)</option>
+                      <option value="1-0F">1-0 (Black Forfeit)</option>
+                      <option value="0-1F">0-1 (White Forfeit)</option>
+                    </select>
+                    {pairing.result !== 'pending' && (
+                      <button 
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => handleResultChange(pairing._id, 'pending')}
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>

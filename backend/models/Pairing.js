@@ -29,6 +29,10 @@ const pairingSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  scheduledTime: {
+    type: Date,
+    default: null // Admin can set match timing
+  },
   createdAt: {
     type: Date,
     default: Date.now

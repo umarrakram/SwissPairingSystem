@@ -120,6 +120,33 @@ router.put('/:id/result', async (req, res) => {
   }
 });
 
+// Update scheduled time for a match
+router.put('/:id/schedule', async (req, res) => {
+  try {
+    const { scheduledTime } = req.body;
+    
+    const pairing = await Pairing.findById(req.params.id);
+    
+    if (!pairing) {
+      return res.status(404).json({ message: 'Pairing not found' });
+    }
+
+    pairing.scheduledTime = scheduledTime ? new Date(scheduledTime) : null;
+    await pairing.save();
+
+    const updatedPairing = await Pairing.findById(req.params.id)
+      .populate('whitePlayer')
+      .populate('blackPlayer');
+
+    res.json({
+      message: 'Match time updated successfully',
+      pairing: updatedPairing
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Get pairing by ID
 router.get('/:id', async (req, res) => {
   try {

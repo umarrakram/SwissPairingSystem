@@ -37,6 +37,7 @@ export const pairingAPI = {
   getByTournament: (tournamentId) => axios.get(`${API_URL}/pairings/tournament/${tournamentId}`),
   generate: (tournamentId) => axios.post(`${API_URL}/pairings/generate`, { tournamentId }),
   updateResult: (id, result) => axios.put(`${API_URL}/pairings/${id}/result`, { result }),
+  updateSchedule: (id, scheduledTime) => axios.put(`${API_URL}/pairings/${id}/schedule`, { scheduledTime }),
   getById: (id) => axios.get(`${API_URL}/pairings/${id}`)
 };
 

@@ -60,6 +60,18 @@ function UserView() {
     return 'result-pending';
   };
 
+  const formatDateTime = (date) => {
+    if (!date) return null;
+    const d = new Date(date);
+    return d.toLocaleString('en-US', { 
+      weekday: 'short',
+      month: 'short', 
+      day: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+  };
+
   if (loading) {
     return <div className="loading">Loading tournament...</div>;
   }
@@ -176,9 +188,16 @@ function UserView() {
                 <div key={pairing._id} className="pairing-card card">
                   <div className="pairing-header">
                     <span className="board-number">Board {pairing.board}</span>
-                    <span className={`result-badge ${getResultClass(pairing.result)}`}>
-                      {pairing.result === 'pending' ? 'In Progress' : pairing.result}
-                    </span>
+                    <div className="header-info">
+                      {pairing.scheduledTime && (
+                        <span className="scheduled-time">
+                          🕐 {formatDateTime(pairing.scheduledTime)}
+                        </span>
+                      )}
+                      <span className={`result-badge ${getResultClass(pairing.result)}`}>
+                        {pairing.result === 'pending' ? 'In Progress' : pairing.result}
+                      </span>
+                    </div>
                   </div>
                   
                   <div className="pairing-match">

@@ -129,6 +129,66 @@
   text-align: center;
 }
 
+.pairing-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.schedule-section,
+.result-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.schedule-section label,
+.result-section label {
+  font-weight: 500;
+  color: #333;
+  min-width: 90px;
+}
+
+.schedule-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.schedule-input-group input[type="datetime-local"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.result-section select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scheduled-time {
+  font-size: 13px;
+  color: #007bff;
+  font-weight: 500;
+  background-color: #e7f3ff;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
 .pairing-actions {
   display: flex;
   align-items: center;
