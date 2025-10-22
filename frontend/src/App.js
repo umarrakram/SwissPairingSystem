@@ -39,8 +39,20 @@ function App() {
           <header className="header">
             <div className="container">
               <div className="flex-between">
-                <Link to="/" style={{ textDecoration: 'none' }}>
-                  <h1>♟️ Swiss Pairing System</h1>
+                <Link to="/" style={{ textDecoration: 'none' }} className="logo-link">
+                  <div className="logo-container">
+                    <img 
+                      src="/ejust-logo.png" 
+                      alt="E-JUST Logo" 
+                      className="logo-image"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
+                    <h1 className="logo-text" style={{ display: 'none' }}>E-JUST Chess</h1>
+                    <h1 className="logo-title">Swiss Pairing System</h1>
+                  </div>
                 </Link>
                 <nav className="flex-gap">
                   <Link to="/" className="btn btn-primary">Admin Dashboard</Link>

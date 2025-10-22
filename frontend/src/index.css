@@ -171,6 +171,36 @@ code {
   font-size: 28px;
 }
 
+.logo-link {
+  text-decoration: none !important;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-image {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  color: #003d82;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.logo-title {
+  color: #007bff;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
 .loading {
   text-align: center;
   padding: 40px;
